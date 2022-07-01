@@ -1,0 +1,42 @@
+﻿@model AñadeAddenda.Models.dtoFactura
+@{
+    ViewBag.Title = "TraerDatos";
+}
+
+<div class="container">
+    @*<div class="row">
+        <div class="col-md-12">
+            <h5>Seleccione la datos del nodo</h5>
+        </div>
+    </div>*@
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("CapturasManuales", "LeeAddenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        <div class="col-md-12 text-center">
+            <h1>Documento: @Session["Folio"] @Session["Serie"] </h1>
+            <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Label("ADDENDA")
+                    <br />
+                    @Html.DropDownList("ddlAddenda", ViewBag.AddendaItems as List<SelectListItem>)
+                </div>
+                <br />
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Agregar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
