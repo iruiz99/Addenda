@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AñadeAddenda.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.Mvc;
@@ -45,44 +46,25 @@ namespace AñadeAddenda.Controllers
         public ActionResult CapturasManuales(int ddlAddenda)
         {
             int IdAddenda = ddlAddenda;
-            List<Models.dtoCapturasManuales> LstCManual = new List<Models.dtoCapturasManuales>();
+            List<dtoCapturasManuales> ListaDeCapturas = new List<dtoCapturasManuales>();
             ToolsXML tools = new ToolsXML();
             List<dtoParametros> lista = new List<dtoParametros>();
-            var tuplas = tools.GetCapturasManuales(lista, IdAddenda);
+            //var tuplas = tools.GetCapturasManuales(lista, IdAddenda);
+             ListaDeCapturas = tools.GetCapturasManuales(lista, IdAddenda);
 
-            Models.dtoCapturasManuales dto = new Models.dtoCapturasManuales();
-
-            foreach (var nodo in tuplas.Item2)
-            {
-                if (dto.MostrarCaptura == true)
-                {
-                    dto.Id = nodo.Id;
-                    dto.Tipo = nodo.Tipo;
-                    dto.Nombre = nodo.Nombre;
-                    dto.Valor = nodo.Valor;
-                    dto.MostrarCaptura = nodo.MostrarCaptura;
-                    //LstCManual.Add(dto);
-                }
-                else
-                {/*no capturable*/}
-                dto.Lista = nodo.Lista;
-                foreach (var atr in nodo.Lista)
-                {
-                    if (dto.Nombre != null)
-                    {
-                        dto.Id = atr.Id;
-                        dto.Tipo = atr.Tipo;
-                        dto.Nombre = atr.Nombre;
-                        dto.Valor = atr.Valor;
-                        dto.MostrarCaptura = atr.MostrarCaptura;
-
-                        LstCManual.Add(dto);
-                    }
-                    else
-                    { /*no capturable*/}
-                }
-            }
-            return View(dto);
+            return View(ListaDeCapturas);
+        }
+        //public ActionResult GuardaValor(List<dtoCapturasManuales> dto)
+        //{
+        //    dto = new List<dtoCapturasManuales>();
+        //    return View();
+        //}
+        [HttpPost]
+        public ActionResult GuardaValor(IEnumerable<dtoCapturasManuales> dtoEnvio)
+        {
+            List<dtoCapturasManuales> dto = new List<dtoCapturasManuales>();
+            dto = (List<dtoCapturasManuales>)dtoEnvio;
+            return View();
         }
     }
 }

@@ -1,34 +1,65 @@
-﻿@model AñadeAddenda.Models.dtoCapturasManuales
+﻿@model IEnumerable<AñadeAddenda.Models.dtoCapturasManuales>
 @{
     ViewBag.Title = "CapturasManuales";
 }
 
-<h2>CapturasManuales</h2>
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <hr/>
+            <h2>Capture los valores solicitados</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            @if (Model.Lista.Count >0)
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("GuardaValor", "LeeAddenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            foreach (var item in Model)
             {
-                foreach (AñadeAddenda.Models.dtoCapturasManuales dto in Model.Lista)
+                if (item.MostrarCaptura == true)
                 {
                     <div class="col-md-12">
                         <div class="row">
-                            <label for="campo">@ViewBag.TIPO : @ViewBag.NOMBRE @Session["NOMBRE"]</label>
-                            <input type="text" class="form-control" id="campo" placeholder="introduce el valor">
-
-                            @*@Html.LabelFor(model => model.Tipo)
-                            @Html.TextBoxFor(model => model.Valor, new { @class = "form-control", @id = "txtValor" })*@
+                            <div class="col-md-12">
+                                @Html.HiddenFor(modelItem => item.Id)
+                                @Html.HiddenFor(modelItem => item.Tipo)
+                                @Html.DisplayFor(modelItem => item.Nombre) :
+                                @Html.DisplayFor(modelItem => item.Valor)
+                                @Html.TextBoxFor(modelItem => item.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
+                                <br />
+                            </div>
                         </div>
                     </div>
                 }
+                else { }
+                foreach (var item2 in item.Lista)
+                {
+                    if (item2.MostrarCaptura == true)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.HiddenFor(modelItem => item2.Id)
+                                @Html.HiddenFor(modelItem => item2.Tipo)
+                                @Html.DisplayFor(modelItem => item2.Nombre) :
+                                @Html.DisplayFor(modelItem => item2.Valor)
+                                @Html.TextBoxFor(modelItem => item2.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
+                                <br />
+                            </div>
+                        </div>
+                    }
+                }
             }
-        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                </div>
+            </div>
+        }
     </div>
 </div>

@@ -78,10 +78,44 @@ public class ToolsXML : dbConection
         return dto;
     }
     //Paso 2 Buscar las capturas de la addenda y las manda a pintar en la vista para la captura
-    public Tuple<bool, List<dtoCapturasManuales>> GetCapturasManuales(List<dtoParametros> lista, int idAddenda)
+    //public Tuple<bool, List<dtoCapturasManuales>> GetCapturasManuales(List<dtoParametros> lista, int idAddenda)
+    //{
+    //    List<dtoCapturasManuales> ListaDeCapturas = new List<dtoCapturasManuales>();
+    //    dtoCapturasManuales dtoCaptura; 
+
+    //    DataTable dt = QueryDatos("SELECT * FROM PMS2000.CFDIANODO WHERE STSNODO = 'A' AND IDADDENDA = " + idAddenda);
+
+    //    foreach (DataRow row in dt.Rows)
+    //    {
+    //        dtoCaptura = new dtoCapturasManuales();
+    //        dtoCaptura.Id = Convert.ToInt32(row["IdNodo"].ToString());
+    //        dtoCaptura.Nombre = row["NombreN"].ToString().Trim();
+    //        dtoCaptura.Valor = "";
+    //        dtoCaptura.Tipo = "NODO";
+    //        if (row["Captura"].ToString() == "S")
+    //            dtoCaptura.MostrarCaptura = true;
+    //        else
+    //        {
+    //            dtoCaptura.MostrarCaptura = false;
+    //        }
+    //        dtoCaptura.Lista = CapturaAtributos(dtoCaptura.Id);
+
+    //        if (dtoCaptura.MostrarCaptura || dtoCaptura.Lista != null)
+    //        {
+    //            ListaDeCapturas.Add(dtoCaptura);
+    //        }
+    //    }
+    //    if (ListaDeCapturas.Count > 0)
+    //    return new Tuple<bool, List<dtoCapturasManuales>>(true, ListaDeCapturas);
+    //    else
+    //        return new Tuple<bool, List<dtoCapturasManuales>>(false, null);
+
+    //}
+    public List<dtoCapturasManuales> GetCapturasManuales(List<dtoParametros> lista, int idAddenda)
     {
         List<dtoCapturasManuales> ListaDeCapturas = new List<dtoCapturasManuales>();
         dtoCapturasManuales dtoCaptura;
+
         DataTable dt = QueryDatos("SELECT * FROM PMS2000.CFDIANODO WHERE STSNODO = 'A' AND IDADDENDA = " + idAddenda);
 
         foreach (DataRow row in dt.Rows)
@@ -105,10 +139,10 @@ public class ToolsXML : dbConection
             }
         }
         if (ListaDeCapturas.Count > 0)
-            return new Tuple<bool, List<dtoCapturasManuales>>(true, ListaDeCapturas);
+            return ListaDeCapturas;
         else
-            return new Tuple<bool, List<dtoCapturasManuales>>(false, null);
-        
+            return null;
+
     }
     private List<dtoCapturasManuales> CapturaAtributos(int IdNodo )
     {
@@ -269,9 +303,9 @@ public class ToolsXML : dbConection
     {
         return Lista.Find(x => x.Campo.ToUpper() == campo.ToUpper()).Valor;
     }
-    public DataTable DtAtributos(int idcom)
+    public DataTable DtAtributos(int IDNODO)
     {
-        return QueryDatos("Select * from PMS2000.CFDIATR WHERE IDCOM = " + idcom);
+        return QueryDatos("Select * from PMS2000.CFDIAATR WHERE IDNODO = " + IDNODO);
     }
     //private DataTable DtServicio(dtoServicio Servicio, List<dtoParametros> Lista)
     //{
