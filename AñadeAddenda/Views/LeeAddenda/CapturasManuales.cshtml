@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AñadeAddenda.Models.dtoCapturasManuales>
+﻿@model List<AñadeAddenda.Models.dtoCapturasManuales>
+
 @{
     ViewBag.Title = "CapturasManuales";
 }
@@ -18,7 +19,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm("GuardaValor", "LeeAddenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Form", "LeeAddenda", FormMethod.Post, new { @class = "btn btn-success glyphicon" }))
         {
             foreach (var item in Model)
             {
@@ -30,7 +31,9 @@
                                 @Html.HiddenFor(modelItem => item.Id)
                                 @Html.HiddenFor(modelItem => item.Tipo)
                                 @Html.DisplayFor(modelItem => item.Nombre) :
+                                @Html.HiddenFor(modelItem => item.Nombre)
                                 @Html.DisplayFor(modelItem => item.Valor)
+                                @Html.HiddenFor(modelItem => item.Valor)
                                 @Html.TextBoxFor(modelItem => item.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
                                 <br />
                             </div>
@@ -47,7 +50,9 @@
                                 @Html.HiddenFor(modelItem => item2.Id)
                                 @Html.HiddenFor(modelItem => item2.Tipo)
                                 @Html.DisplayFor(modelItem => item2.Nombre) :
+                                @Html.HiddenFor(modelItem => item2.Nombre)
                                 @Html.DisplayFor(modelItem => item2.Valor)
+                                @Html.HiddenFor(modelItem => item2.Valor)
                                 @Html.TextBoxFor(modelItem => item2.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
                                 <br />
                             </div>
@@ -63,3 +68,4 @@
         }
     </div>
 </div>
+

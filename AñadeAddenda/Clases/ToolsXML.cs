@@ -120,22 +120,25 @@ public class ToolsXML : dbConection
 
         foreach (DataRow row in dt.Rows)
         {
-            dtoCaptura = new dtoCapturasManuales();
-            dtoCaptura.Id = Convert.ToInt32(row["IdNodo"].ToString());
-            dtoCaptura.Nombre = row["NombreN"].ToString().Trim();
-            dtoCaptura.Valor = "";
-            dtoCaptura.Tipo = "NODO";
-            if (row["Captura"].ToString() == "S")
-                dtoCaptura.MostrarCaptura = true;
-            else
+            if (row["ESCONCEPTO"].ToString() == "N")
             {
-                dtoCaptura.MostrarCaptura = false;
-            }
-            dtoCaptura.Lista = CapturaAtributos(dtoCaptura.Id);
+                dtoCaptura = new dtoCapturasManuales();
+                dtoCaptura.Id = Convert.ToInt32(row["IdNodo"].ToString());
+                dtoCaptura.Nombre = row["NombreN"].ToString().Trim();
+                dtoCaptura.Valor = "";
+                dtoCaptura.Tipo = "NODO";
+                if (row["Captura"].ToString() == "S")
+                    dtoCaptura.MostrarCaptura = true;
+                else
+                {
+                    dtoCaptura.MostrarCaptura = false;
+                }
+                dtoCaptura.Lista = CapturaAtributos(dtoCaptura.Id);
 
-            if (dtoCaptura.MostrarCaptura || dtoCaptura.Lista != null)
-            {
-                ListaDeCapturas.Add(dtoCaptura);
+                if (dtoCaptura.MostrarCaptura || dtoCaptura.Lista != null)
+                {
+                    ListaDeCapturas.Add(dtoCaptura);
+                }
             }
         }
         if (ListaDeCapturas.Count > 0)

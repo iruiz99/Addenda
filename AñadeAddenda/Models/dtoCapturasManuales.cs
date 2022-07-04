@@ -14,8 +14,13 @@ namespace AñadeAddenda.Models
         public string Nombre { get; set; }
         public string Valor { get; set; }
         public bool MostrarCaptura { get; set; }
-
+        public string Status { get; set; }
         private List<dtoCapturasManuales> lista;
         public List<dtoCapturasManuales> Lista { get => lista; set => lista = value; }
+        public IList<dtoCapturasManuales> ValorNew
+        {
+            get;
+            set;
+        }
     }
 }

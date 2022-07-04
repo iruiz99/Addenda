@@ -177,6 +177,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\LeeAddenda\TraerDatos.cshtml" />
     <Content Include="Views\LeeAddenda\CapturasManuales.cshtml" />
+    <Content Include="Views\LeeAddenda\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

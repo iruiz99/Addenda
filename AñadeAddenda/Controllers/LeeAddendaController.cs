@@ -50,20 +50,23 @@ namespace AñadeAddenda.Controllers
             ToolsXML tools = new ToolsXML();
             List<dtoParametros> lista = new List<dtoParametros>();
             //var tuplas = tools.GetCapturasManuales(lista, IdAddenda);
-             ListaDeCapturas = tools.GetCapturasManuales(lista, IdAddenda);
+            ListaDeCapturas = tools.GetCapturasManuales(lista, IdAddenda);
 
             return View(ListaDeCapturas);
         }
-        //public ActionResult GuardaValor(List<dtoCapturasManuales> dto)
-        //{
-        //    dto = new List<dtoCapturasManuales>();
-        //    return View();
-        //}
         [HttpPost]
-        public ActionResult GuardaValor(IEnumerable<dtoCapturasManuales> dtoEnvio)
+        public ActionResult Form(List<dtoCapturasManuales> dto)
         {
-            List<dtoCapturasManuales> dto = new List<dtoCapturasManuales>();
-            dto = (List<dtoCapturasManuales>)dtoEnvio;
+            dto = new List<dtoCapturasManuales>();
+
+            if (dto.Count > 0)
+            {
+                //ViewBag.Mensaje = "EXITOSO";
+            }
+            else
+            {
+                //ViewBag.Mensaje = "ERROR";
+            }    
             return View();
         }
     }
