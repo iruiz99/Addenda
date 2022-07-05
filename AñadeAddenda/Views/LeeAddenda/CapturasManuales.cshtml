@@ -34,7 +34,7 @@
                                 @Html.HiddenFor(modelItem => item.Nombre)
                                 @Html.DisplayFor(modelItem => item.Valor)
                                 @Html.HiddenFor(modelItem => item.Valor)
-                                @Html.TextBoxFor(modelItem => item.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
+                                @Html.TextBoxFor(modelItem => item.Valor, new { @class = "form-control", @id = "txtValor{0}", placeholder = "Introduce el valor" })
                                 <br />
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                 @Html.HiddenFor(modelItem => item2.Nombre)
                                 @Html.DisplayFor(modelItem => item2.Valor)
                                 @Html.HiddenFor(modelItem => item2.Valor)
-                                @Html.TextBoxFor(modelItem => item2.Valor, new { @class = "form-control", @id = "txtValor", placeholder = "Introduce el valor" })
+                                @Html.TextBoxFor(modelItem => item2.Valor, new { @class = "form-control", @id = "txtValor{0}", placeholder = "Introduce el valor" })
                                 <br />
                             </div>
                         </div>
@@ -62,10 +62,10 @@
             }
             <div class="row">
                 <div class="col-md-12">
-                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @*<input id="btnGuardar" type="submit" value="Agregar" class="btn btn-success" />*@
                 </div>
             </div>
         }
     </div>
 </div>
-

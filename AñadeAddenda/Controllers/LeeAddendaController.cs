@@ -55,19 +55,20 @@ namespace AñadeAddenda.Controllers
             return View(ListaDeCapturas);
         }
         [HttpPost]
-        public ActionResult Form(List<dtoCapturasManuales> dto)
+        public ActionResult Form(IEnumerable<dtoCapturasManuales> dto)
         {
-            dto = new List<dtoCapturasManuales>();
+            var result = dto;
+            //dto = new List<dtoCapturasManuales>();
 
-            if (dto.Count > 0)
-            {
-                //ViewBag.Mensaje = "EXITOSO";
-            }
-            else
-            {
-                //ViewBag.Mensaje = "ERROR";
-            }    
-            return View();
+            //if (result)
+            //{
+            //    //ViewBag.Mensaje = "EXITOSO";
+            //}
+            //else
+            //{
+            //    //ViewBag.Mensaje = "ERROR";
+            //}    
+            return View(result);
         }
     }
 }
