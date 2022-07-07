@@ -4,6 +4,7 @@
     ViewBag.Title = "CapturasManuales";
 }
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -19,53 +20,63 @@
 
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm("Form", "LeeAddenda", FormMethod.Post, new { @class = "btn btn-success glyphicon" }))
+        @using (Html.BeginForm("GuardaFormulario", "LeeAddenda", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
+            {
+                var capturas = (List<AñadeAddenda.Models.dtoCapturasManuales>)ViewData["MyData"]; // Cast the list
+            }
             foreach (var item in Model)
             {
                 if (item.MostrarCaptura == true)
                 {
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-12">
-                                @Html.HiddenFor(modelItem => item.Id)
-                                @Html.HiddenFor(modelItem => item.Tipo)
-                                @Html.DisplayFor(modelItem => item.Nombre) :
-                                @Html.HiddenFor(modelItem => item.Nombre)
-                                @Html.DisplayFor(modelItem => item.Valor)
-                                @Html.HiddenFor(modelItem => item.Valor)
-                                @Html.TextBoxFor(modelItem => item.Valor, new { @class = "form-control", @id = "txtValor{0}", placeholder = "Introduce el valor" })
+                            <div id="foreachNodo" class="col-md-12">
+                                <div class="input-group">
+                                    <label for="input-@item.Id">@item.Id @item.Tipo @item.Nombre</label>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">@item.Valor</span>
+                                    <input type="text" class="form-control" placeholder="Ingrese el valor" name="@item.Valor" aria-describedby="basic-addon1">
+                                </div>
                                 <br />
                             </div>
                         </div>
                     </div>
                 }
-                else { }
                 foreach (var item2 in item.Lista)
                 {
                     if (item2.MostrarCaptura == true)
                     {
                         <div class="row">
                             <div class="col-md-12">
-                                @Html.HiddenFor(modelItem => item2.Id)
-                                @Html.HiddenFor(modelItem => item2.Tipo)
-                                @Html.DisplayFor(modelItem => item2.Nombre) :
-                                @Html.HiddenFor(modelItem => item2.Nombre)
-                                @Html.DisplayFor(modelItem => item2.Valor)
-                                @Html.HiddenFor(modelItem => item2.Valor)
-                                @Html.TextBoxFor(modelItem => item2.Valor, new { @class = "form-control", @id = "txtValor{0}", placeholder = "Introduce el valor" })
+                                <div class="input-group">
+                                    <label for="input-@item2.Id">@item2.Id @item2.Tipo @item2.Nombre</label>
+                                </div>
+                                <div class="input-group">
+                                    @*<span class="input-group-addon" id="basic-addon1">@item2.Valor</span>
+                                    <input type="text" class="form-control" placeholder="Ingrese el valor" name="@item2.Valor" aria-describedby="basic-addon1">*@
+                                    @Html.LabelFor(model => item2.Valor, "Valor")
+                                    @Html.TextBoxFor(model => item2.Valor, new { @class = "form-control", @id = "txtValor" })
+                                    @Html.ValidationMessageFor(model => item2.Valor, null, new { @class = "text-danger" })
+
+                                    @*<input type="text" id="txtAtributo" name="Atributo" value="GENERAL" placeholder="(Sin Descripción)" class="form-control">*@
+                                </div>
                                 <br />
                             </div>
                         </div>
                     }
+
                 }
             }
             <div class="row">
                 <div class="col-md-12">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
-                    @*<input id="btnGuardar" type="submit" value="Agregar" class="btn btn-success" />*@
+                    <a class="btn btn-danger glyphicon glyphicon-bold" href="@Url.Action("GuardaFormulario", "LeeAddenda", new
+                                                                                    { IdAtr = Model })"></a>
                 </div>
             </div>
+
         }
     </div>
 </div>

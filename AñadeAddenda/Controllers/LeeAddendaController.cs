@@ -55,20 +55,22 @@ namespace AñadeAddenda.Controllers
             return View(ListaDeCapturas);
         }
         [HttpPost]
-        public ActionResult Form(IEnumerable<dtoCapturasManuales> dto)
+        public ActionResult GuardaFormulario()
         {
-            var result = dto;
-            //dto = new List<dtoCapturasManuales>();
+            dtoCapturasManuales dto = new dtoCapturasManuales();
+            var CapturasManuales = dto.Lista;
 
-            //if (result)
-            //{
-            //    //ViewBag.Mensaje = "EXITOSO";
-            //}
-            //else
-            //{
-            //    //ViewBag.Mensaje = "ERROR";
-            //}    
-            return View(result);
+            var capturas = dto.Lista;
+            ViewData["MyData"] = capturas; // Send this list to the view
+
+            return View(capturas);
+            //var prueba3 = Session["Model"];
+            //var id = prueba3;
+
+            //var prueba1 = Request.Form;
+            //var temp = Server.HtmlEncode(prueba1.ToString());
+            //return View(prueba3);
+            //return Content(prueba3.ToString());
         }
     }
 }

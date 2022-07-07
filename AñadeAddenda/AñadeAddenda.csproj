@@ -160,6 +160,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\Lista.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -177,7 +178,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\LeeAddenda\TraerDatos.cshtml" />
     <Content Include="Views\LeeAddenda\CapturasManuales.cshtml" />
-    <Content Include="Views\LeeAddenda\Form.cshtml" />
+    <Content Include="Views\LeeAddenda\GuardaFormulario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
